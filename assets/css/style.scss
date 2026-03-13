@@ -1,0 +1,21 @@
+---
+---
+
+@import "minima";
+
+// Improve post readability
+.post-content {
+  font-size: 1.05rem;
+  line-height: 1.75;
+
+  h2 { margin-top: 2.5rem; }
+  h3 { margin-top: 2rem; }
+
+  p, li { max-width: 70ch; }
+
+  blockquote {
+    font-style: italic;
+    border-left: 3px solid #aaa;
+    color: #555;
+  }
+}
