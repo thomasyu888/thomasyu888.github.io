@@ -3,11 +3,37 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap");
 
-$base-font-family: "Lato", sans-serif;
+// Minima color variables (override before import)
+$base-font-family:   "Lato", sans-serif;
+$text-color:         #e0e0e0;
+$background-color:   #1a1a1a;
+$brand-color:        #7eb8f7;
+$grey-color:         #888;
+$grey-color-light:   #333;
+$grey-color-dark:    #bbb;
 
 @import "minima";
 
-// Improve post readability
+// Nav + header
+.site-header {
+  background-color: #111;
+  border-top: none;
+  border-bottom: 1px solid #2e2e2e;
+
+  .site-title, .site-title:visited { color: #fff; }
+  .page-link { color: #ccc; }
+}
+
+// Footer
+.site-footer {
+  background-color: #111;
+  border-top: 1px solid #2e2e2e;
+  color: #888;
+
+  a { color: #7eb8f7; }
+}
+
+// Post readability
 .post-content {
   font-size: 1.05rem;
   line-height: 1.75;
@@ -19,7 +45,16 @@ $base-font-family: "Lato", sans-serif;
 
   blockquote {
     font-style: italic;
-    border-left: 3px solid #aaa;
-    color: #555;
+    border-left: 3px solid #444;
+    color: #999;
   }
+
+  a { color: #7eb8f7; }
+}
+
+// Code blocks
+pre, code {
+  background-color: #252525;
+  border-color: #333;
+  color: #ddd;
 }
