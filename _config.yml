@@ -4,7 +4,15 @@ description: Engineering, data systems, and AI workflows.
 url: "https://thomasyu888.github.io"
 
 author: Tom Yu
-github_username: thomasyu888
+
+minima:
+  social_links:
+    - title: GitHub
+      icon: github
+      url: "https://github.com/thomasyu888"
+    - title: LinkedIn
+      icon: linkedin
+      url: "https://www.linkedin.com/in/thomasyu888/"
 
 plugins:
   - jekyll-feed
