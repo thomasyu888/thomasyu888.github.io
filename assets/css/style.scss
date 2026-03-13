@@ -1,45 +1,55 @@
 ---
 ---
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap");
-
-// Minima color variables (override before import)
-$base-font-family:   "Lato", sans-serif;
-$text-color:         #e0e0e0;
-$background-color:   #1a1a1a;
-$brand-color:        #7eb8f7;
-$grey-color:         #888;
-$grey-color-light:   #333;
-$grey-color-dark:    #bbb;
-
 @import "minima";
 
-// Nav + header
+// ── Font ──────────────────────────────────────────────
+body, h1, h2, h3, h4, h5, h6, p, li, a, blockquote, code, pre {
+  font-family: "Lato", sans-serif;
+}
+
+// ── Dark mode ─────────────────────────────────────────
+html, body {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+a { color: #7eb8f7; }
+a:visited { color: #a89fdf; }
+
 .site-header {
   background-color: #111;
   border-top: none;
   border-bottom: 1px solid #2e2e2e;
 
-  .site-title, .site-title:visited { color: #fff; }
-  .page-link { color: #ccc; }
+  .site-title,
+  .site-title:visited { color: #ffffff; }
+
+  .page-link { color: #cccccc; }
+
+  .menu-icon > svg path { fill: #ccc; }
 }
 
-// Footer
 .site-footer {
   background-color: #111;
   border-top: 1px solid #2e2e2e;
   color: #888;
 
-  a { color: #7eb8f7; }
+  a, a:visited { color: #7eb8f7; }
 }
 
-// Post readability
+.post-list h3 a,
+.post-list h3 a:visited { color: #7eb8f7; }
+
+.post-meta { color: #888; }
+
+// ── Post readability ──────────────────────────────────
 .post-content {
   font-size: 1.05rem;
   line-height: 1.75;
 
-  h2 { margin-top: 2.5rem; }
-  h3 { margin-top: 2rem; }
+  h2 { margin-top: 2.5rem; color: #ffffff; }
+  h3 { margin-top: 2rem;   color: #eeeeee; }
 
   p, li { max-width: 70ch; }
 
@@ -47,12 +57,13 @@ $grey-color-dark:    #bbb;
     font-style: italic;
     border-left: 3px solid #444;
     color: #999;
+    background: none;
   }
 
   a { color: #7eb8f7; }
 }
 
-// Code blocks
+// ── Code ──────────────────────────────────────────────
 pre, code {
   background-color: #252525;
   border-color: #333;
