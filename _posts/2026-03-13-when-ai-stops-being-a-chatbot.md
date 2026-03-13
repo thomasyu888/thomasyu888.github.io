@@ -93,28 +93,23 @@ That's a fundamentally different problem — and it exposes the core limitation 
 
 More recently, I've been experimenting with a workflow centered around Claude.
 
-The interesting change isn't model capability — it's the idea of working with artifacts instead of isolated conversations. Instead of starting every session with a blank chat window, the work begins with the things you're already building: documents, code, datasets, structured ideas. The AI operates within that environment rather than alongside it.
+The shift isn't model capability — it's working with artifacts instead of isolated conversations. Instead of starting every session from a blank window, the work begins with the things you're already building: documents, code, datasets, structured ideas. Documents evolve collaboratively rather than being rewritten from scratch. Code and explanations live alongside each other. Context accumulates rather than resetting.
 
-The consequences are practical: documents evolve collaboratively instead of being rewritten from scratch. Code and explanations live alongside each other. Context accumulates rather than resetting.
+The next layer is live connections. MCP (Model Context Protocol) lets you connect the model directly to your actual systems rather than describing them. In my current workflow that means GitHub, Jira, Slack, and [Synapse](https://claude.com/resources/tutorials/using-the-synapse-org-connector-in-claude) — the biomedical research platform where much of the scientific data we work with lives. The agent can query open tickets, check repository state, look up dataset metadata, and pull project context from Slack threads — all in a single session, without manual copy-pasting.
 
-The next step beyond that is agents.
+On top of that sits [Agent Skills](https://agentskills.io) — an open standard for giving agents discoverable capabilities. A skill is a folder of instructions, scripts, and context that an agent finds and uses autonomously. Instead of you providing context at the start of each session, the agent discovers what it needs as the work unfolds. As the systems change, the agent's understanding of them changes too.
 
-I've been experimenting with workflows built around [Agent Skills](https://agentskills.io) — an open standard, originally developed by Anthropic, for giving AI agents discoverable capabilities. A skill is a folder of instructions, scripts, and context that an agent can find and use autonomously. Instead of you manually providing context at the start of each session, the agent discovers what it needs as the work unfolds.
+The result is that the gap between "what the model knows" and "what is actually true right now" collapses.
 
-The practical difference is significant. An agent with the right skills can navigate a codebase, check current pipeline state, consult documentation, and act — without you reconstructing that context by hand. As the work changes, the agent's understanding of it changes too.
-
-This is where MCP (Model Context Protocol) comes in. Rather than describing your systems to the model, you connect the model directly to them. In my current workflow that means live connections to GitHub, Jira, Slack, and [Synapse](https://claude.com/resources/tutorials/using-the-synapse-org-connector-in-claude) — the biomedical research platform where much of the scientific data we work with lives. The agent can query open tickets, check repository state, look up dataset metadata, and pull project context from Slack threads — all within a single session, without any manual copy-pasting.
-
-The result is that the gap between "what the model knows" and "what is actually true right now" collapses. Instead of working from a description of the system, the agent works from the system itself.
-
-> **Tip:** Agent Skills has been adopted across 30+ tools — Claude Code, GitHub Copilot, Cursor, Databricks, and others. Skills you define work across all of them, which means the context you build once travels with you across your entire toolchain.
+> **Tip:** Agent Skills is adopted across 30+ tools — Claude Code, GitHub Copilot, Cursor, Databricks, and others. Skills you define once travel with you across your entire toolchain.
 {: .tip}
 
 ---
 
 ## AI as Engineering Infrastructure
 
-What this points toward is larger than any single tool.
+> **Important:** What this points toward is larger than any single tool.
+{: .important}
 
 We've seen this pattern before. Version control changed how teams collaborate on code. Continuous integration changed how software gets validated. Cloud infrastructure changed how systems get deployed. Each shift didn't just add a new tool — it changed the underlying conditions of how engineering work happens.
 
