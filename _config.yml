@@ -1,15 +1,10 @@
 theme: minima
-title: Thomas Yu
+title: My Thoughts on "Paper"
 description: Engineering, data systems, and AI workflows.
 url: "https://thomasyu888.github.io"
 
-author:
-  name: Thomas Yu
-
-minima:
-  social_links:
-    - { platform: linkedin, user_url: "https://www.linkedin.com/in/thomasyu888/" }
-    - { platform: github, username: thomasyu888 }
+author: Tom Yu
+github_username: thomasyu888
 
 plugins:
   - jekyll-feed
