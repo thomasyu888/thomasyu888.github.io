@@ -1,80 +1,259 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" width="800" height="380" font-family="Lato, sans-serif">
-  <!-- Background -->
-  <rect width="800" height="380" fill="#1a1a1a" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="900" height="420" font-family="'Lato', sans-serif">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090f"/>
+      <stop offset="100%" stop-color="#0d0d1a"/>
+    </linearGradient>
 
-  <!-- Divider -->
-  <line x1="400" y1="30" x2="400" y2="350" stroke="#333" stroke-width="1" stroke-dasharray="6,4"/>
+    <!-- Left panel subtle vignette -->
+    <radialGradient id="left-glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#c0392b" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#09090f" stop-opacity="0"/>
+    </radialGradient>
 
-  <!-- === LEFT PANEL: Chat Interface === -->
-  <text x="200" y="58" text-anchor="middle" fill="#888" font-size="11" letter-spacing="2" font-weight="700">BEFORE</text>
-  <text x="200" y="80" text-anchor="middle" fill="#ccc" font-size="16" font-weight="300">Chat Interface</text>
+    <!-- Right panel glow -->
+    <radialGradient id="right-glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#0d0d1a" stop-opacity="0"/>
+    </radialGradient>
 
-  <!-- Person -->
-  <circle cx="80" cy="160" r="18" fill="none" stroke="#555" stroke-width="1.5"/>
-  <text x="80" y="165" text-anchor="middle" fill="#777" font-size="13">👤</text>
+    <!-- AI node glow -->
+    <radialGradient id="ai-node-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4a9eff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#4a9eff" stop-opacity="0"/>
+    </radialGradient>
 
-  <!-- Isolated chat bubbles -->
-  <rect x="118" y="110" width="130" height="34" rx="6" fill="#252525" stroke="#333" stroke-width="1"/>
-  <text x="183" y="130" text-anchor="middle" fill="#666" font-size="10">paste code... explain again...</text>
+    <!-- Blue glow filter -->
+    <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-  <rect x="118" y="155" width="130" height="34" rx="6" fill="#252525" stroke="#333" stroke-width="1"/>
-  <text x="183" y="175" text-anchor="middle" fill="#666" font-size="10">new conversation, start over</text>
+    <!-- Soft glow filter for lines -->
+    <filter id="line-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-  <rect x="118" y="200" width="130" height="34" rx="6" fill="#252525" stroke="#333" stroke-width="1"/>
-  <text x="183" y="220" text-anchor="middle" fill="#666" font-size="10">paste code... explain again...</text>
+    <!-- Node pulse glow -->
+    <filter id="node-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-  <!-- Arrows between bubbles (showing repetition) -->
-  <path d="M 118 162 Q 100 171 118 180" stroke="#3a3a3a" stroke-width="1.5" fill="none" marker-end="url(#arr-grey)"/>
-  <path d="M 118 207 Q 100 216 118 225" stroke="#3a3a3a" stroke-width="1.5" fill="none" marker-end="url(#arr-grey)"/>
+    <!-- Grain texture -->
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="overlay" result="blend"/>
+      <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+    </filter>
 
-  <!-- "No memory" label -->
-  <text x="200" y="268" text-anchor="middle" fill="#c0392b" font-size="11">✕  no shared context</text>
-  <text x="200" y="286" text-anchor="middle" fill="#c0392b" font-size="11">✕  resets every session</text>
+    <!-- Arrow marker - blue -->
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,1 L7,4 L0,7 Z" fill="#4a9eff" opacity="0.7"/>
+    </marker>
 
-  <!-- === RIGHT PANEL: AI Workspace === -->
-  <text x="600" y="58" text-anchor="middle" fill="#888" font-size="11" letter-spacing="2" font-weight="700">AFTER</text>
-  <text x="600" y="80" text-anchor="middle" fill="#ccc" font-size="16" font-weight="300">AI Workspace</text>
+    <!-- Clip paths for panels -->
+    <clipPath id="left-panel-clip">
+      <rect x="0" y="0" width="440" height="420" rx="0"/>
+    </clipPath>
+    <clipPath id="right-panel-clip">
+      <rect x="450" y="0" width="450" height="420" rx="0"/>
+    </clipPath>
+
+    <!-- Animated pulse for AI node -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&amp;display=swap');
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; r: 34; }
+        50% { opacity: 0.7; r: 42; }
+      }
+      @keyframes pulse2 {
+        0%, 100% { opacity: 0.1; r: 50; }
+        50% { opacity: 0.35; r: 60; }
+      }
+      @keyframes dash-flow {
+        0% { stroke-dashoffset: 30; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes line-glow-pulse {
+        0%, 100% { opacity: 0.35; }
+        50% { opacity: 0.75; }
+      }
+      @keyframes node-fade {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+      }
+      .pulse-ring1 {
+        animation: pulse 3s ease-in-out infinite;
+      }
+      .pulse-ring2 {
+        animation: pulse2 3s ease-in-out infinite;
+        animation-delay: 0.5s;
+      }
+      .flow-line {
+        animation: dash-flow 2.5s linear infinite;
+        stroke-dasharray: 6 4;
+      }
+      .glow-line {
+        animation: line-glow-pulse 3s ease-in-out infinite;
+      }
+      .node-anim {
+        animation: node-fade 3s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- === BACKGROUND === -->
+  <rect width="900" height="420" fill="url(#bg)" rx="12"/>
+  <!-- Grain overlay -->
+  <rect width="900" height="420" fill="transparent" filter="url(#grain)" opacity="0.025" rx="12"/>
+
+  <!-- Subtle top rule line -->
+  <line x1="40" y1="0" x2="860" y2="0" stroke="#ffffff" stroke-width="0" opacity="0"/>
+
+  <!-- === LEFT PANEL BG === -->
+  <rect x="0" y="0" width="445" height="420" fill="url(#left-glow)" rx="12" clip-path="url(#left-panel-clip)"/>
+
+  <!-- === RIGHT PANEL BG === -->
+  <rect x="455" y="0" width="445" height="420" fill="url(#right-glow)" clip-path="url(#right-panel-clip)"/>
+
+  <!-- === DIVIDER === -->
+  <line x1="450" y1="24" x2="450" y2="396" stroke="#1e1e2e" stroke-width="1"/>
+  <!-- Divider glow -->
+  <line x1="450" y1="24" x2="450" y2="396" stroke="#4a9eff" stroke-width="0.5" opacity="0.12"/>
+
+  <!-- ===================== -->
+  <!-- === LEFT PANEL === -->
+  <!-- ===================== -->
+
+  <!-- BEFORE label -->
+  <text x="222" y="46" text-anchor="middle" fill="#885050" font-size="11" letter-spacing="4" font-weight="700" font-family="'Lato', sans-serif">BEFORE</text>
+  <!-- Title -->
+  <text x="222" y="74" text-anchor="middle" fill="#aaaabc" font-size="20" font-weight="300" letter-spacing="0.5" font-family="'Lato', sans-serif">Chat Interface</text>
+  <!-- Thin underline -->
+  <line x1="130" y1="83" x2="314" y2="83" stroke="#442020" stroke-width="0.75"/>
+
+  <!-- Person icon — refined -->
+  <circle cx="68" cy="175" r="20" fill="none" stroke="#443030" stroke-width="1"/>
+  <circle cx="68" cy="168" r="6" fill="#443030"/>
+  <path d="M55,188 Q55,178 68,178 Q81,178 81,188" fill="#443030"/>
+
+  <!-- Three chat bubbles — wider to fit text comfortably -->
+  <!-- Bubble 1 -->
+  <rect x="98" y="115" width="220" height="44" rx="7" fill="#181820" stroke="#3a2828" stroke-width="1"/>
+  <text x="208" y="135" text-anchor="middle" fill="#aa8080" font-size="11.5" font-family="'Lato', sans-serif">paste code... explain again...</text>
+  <text x="208" y="152" text-anchor="middle" fill="#664444" font-size="10" font-family="'Lato', sans-serif" font-style="italic">isolated</text>
+
+  <!-- Bubble 2 -->
+  <rect x="98" y="172" width="220" height="44" rx="7" fill="#181820" stroke="#3a2828" stroke-width="1"/>
+  <text x="208" y="192" text-anchor="middle" fill="#aa8080" font-size="11.5" font-family="'Lato', sans-serif">new session — start over</text>
+  <text x="208" y="209" text-anchor="middle" fill="#664444" font-size="10" font-family="'Lato', sans-serif" font-style="italic">isolated</text>
+
+  <!-- Bubble 3 -->
+  <rect x="98" y="229" width="220" height="44" rx="7" fill="#181820" stroke="#3a2828" stroke-width="1"/>
+  <text x="208" y="249" text-anchor="middle" fill="#aa8080" font-size="11.5" font-family="'Lato', sans-serif">paste code... explain again...</text>
+  <text x="208" y="266" text-anchor="middle" fill="#664444" font-size="10" font-family="'Lato', sans-serif" font-style="italic">isolated</text>
+
+  <!-- Repeat indicators — subtle dots -->
+  <circle cx="82" cy="182" r="2.5" fill="#3a2020"/>
+  <circle cx="82" cy="239" r="2.5" fill="#3a2020"/>
+
+  <!-- Separator before negative labels -->
+  <line x1="80" y1="292" x2="364" y2="292" stroke="#331a1a" stroke-width="0.5"/>
+
+  <!-- Negative labels -->
+  <text x="222" y="316" text-anchor="middle" fill="#b04040" font-size="13" font-family="'Lato', sans-serif">✕  no shared context</text>
+  <text x="222" y="340" text-anchor="middle" fill="#b04040" font-size="13" font-family="'Lato', sans-serif">✕  resets every session</text>
+  <text x="222" y="364" text-anchor="middle" fill="#b04040" font-size="13" font-family="'Lato', sans-serif">✕  friction at every step</text>
+
+  <!-- ===================== -->
+  <!-- === RIGHT PANEL === -->
+  <!-- ===================== -->
+
+  <!-- AFTER label -->
+  <text x="672" y="46" text-anchor="middle" fill="#1a4a7a" font-size="11" letter-spacing="4" font-weight="700" font-family="'Lato', sans-serif">AFTER</text>
+  <!-- Title -->
+  <text x="672" y="74" text-anchor="middle" fill="#aaaacc" font-size="20" font-weight="300" letter-spacing="0.5" font-family="'Lato', sans-serif">AI Workspace</text>
+  <!-- Thin underline -->
+  <line x1="580" y1="83" x2="764" y2="83" stroke="#0d2a50" stroke-width="0.75"/>
+
+  <!-- Pulse rings around AI node (animated) -->
+  <circle class="pulse-ring1" cx="672" cy="195" r="38" fill="none" stroke="#4a9eff" stroke-width="0.8" opacity="0.3"/>
+  <circle class="pulse-ring2" cx="672" cy="195" r="54" fill="none" stroke="#4a9eff" stroke-width="0.5" opacity="0.1"/>
+
+  <!-- AI node background glow -->
+  <circle cx="672" cy="195" r="38" fill="url(#ai-node-glow)"/>
 
   <!-- Central AI node -->
-  <circle cx="600" cy="185" r="30" fill="#1a2a3a" stroke="#4a9eff" stroke-width="1.5"/>
-  <text x="600" y="181" text-anchor="middle" fill="#7eb8f7" font-size="10" font-weight="700">AI</text>
-  <text x="600" y="195" text-anchor="middle" fill="#7eb8f7" font-size="9">context</text>
+  <circle cx="672" cy="195" r="30" fill="#060c18" stroke="#4a9eff" stroke-width="1.5" filter="url(#glow-blue)"/>
+  <text x="672" y="191" text-anchor="middle" fill="#a8d4ff" font-size="14" font-weight="700" font-family="'Lato', sans-serif" letter-spacing="2">AI</text>
+  <text x="672" y="207" text-anchor="middle" fill="#5a90bb" font-size="9" font-family="'Lato', sans-serif" letter-spacing="2" font-weight="700">CONTEXT</text>
 
-  <!-- Surrounding nodes -->
-  <rect x="448" y="108" width="68" height="28" rx="5" fill="#1e2a1e" stroke="#3fb950" stroke-width="1"/>
-  <text x="482" y="126" text-anchor="middle" fill="#3fb950" font-size="10">code</text>
+  <!-- === SURROUNDING NODES === -->
+  <!-- Top left: code -->
+  <rect x="509" y="108" width="72" height="32" rx="6" fill="#0a140a" stroke="#3fb950" stroke-width="1" opacity="0.9"/>
+  <text x="545" y="129" text-anchor="middle" fill="#5fd070" font-size="12" font-family="'Lato', sans-serif">code</text>
+  <!-- Middle left: docs -->
+  <rect x="509" y="179" width="72" height="32" rx="6" fill="#131005" stroke="#f0a500" stroke-width="1" opacity="0.9"/>
+  <text x="545" y="200" text-anchor="middle" fill="#f5bb30" font-size="12" font-family="'Lato', sans-serif">docs</text>
+  <!-- Bottom left: datasets -->
+  <rect x="509" y="250" width="72" height="32" rx="6" fill="#0d0818" stroke="#b56bff" stroke-width="1" opacity="0.9"/>
+  <text x="545" y="271" text-anchor="middle" fill="#cc88ff" font-size="12" font-family="'Lato', sans-serif">datasets</text>
+  <!-- Top right: schemas -->
+  <rect x="762" y="108" width="72" height="32" rx="6" fill="#060f1a" stroke="#4a9eff" stroke-width="1" opacity="0.9"/>
+  <text x="798" y="129" text-anchor="middle" fill="#6ab5ff" font-size="12" font-family="'Lato', sans-serif">schemas</text>
+  <!-- Middle right: pipelines -->
+  <rect x="762" y="179" width="72" height="32" rx="6" fill="#0a140a" stroke="#3fb950" stroke-width="1" opacity="0.9"/>
+  <text x="798" y="200" text-anchor="middle" fill="#5fd070" font-size="12" font-family="'Lato', sans-serif">pipelines</text>
+  <!-- Bottom right: history -->
+  <rect x="762" y="250" width="72" height="32" rx="6" fill="#131005" stroke="#f0a500" stroke-width="1" opacity="0.9"/>
+  <text x="798" y="271" text-anchor="middle" fill="#f5bb30" font-size="12" font-family="'Lato', sans-serif">history</text>
 
-  <rect x="448" y="168" width="68" height="28" rx="5" fill="#2a2010" stroke="#f0a500" stroke-width="1"/>
-  <text x="482" y="186" text-anchor="middle" fill="#f0a500" font-size="10">docs</text>
+  <!-- === CONNECTING LINES (animated flowing dashes) === -->
+  <!-- code → AI -->
+  <line x1="581" y1="124" x2="644" y2="174" stroke="#3fb950" stroke-width="0.8" class="glow-line" opacity="0.5"/>
+  <line x1="581" y1="124" x2="644" y2="174" stroke="#3fb950" stroke-width="0.8" class="flow-line" opacity="0.3"/>
 
-  <rect x="448" y="228" width="68" height="28" rx="5" fill="#21183a" stroke="#b56bff" stroke-width="1"/>
-  <text x="482" y="246" text-anchor="middle" fill="#b56bff" font-size="10">datasets</text>
+  <!-- docs → AI -->
+  <line x1="581" y1="195" x2="642" y2="195" stroke="#f0a500" stroke-width="0.8" class="glow-line" opacity="0.5"/>
+  <line x1="581" y1="195" x2="642" y2="195" stroke="#f0a500" stroke-width="0.8" class="flow-line" opacity="0.3"/>
 
-  <rect x="684" y="108" width="68" height="28" rx="5" fill="#1a2a3a" stroke="#4a9eff" stroke-width="1"/>
-  <text x="718" y="126" text-anchor="middle" fill="#4a9eff" font-size="10">schemas</text>
+  <!-- datasets → AI -->
+  <line x1="581" y1="266" x2="644" y2="216" stroke="#b56bff" stroke-width="0.8" class="glow-line" opacity="0.5"/>
+  <line x1="581" y1="266" x2="644" y2="216" stroke="#b56bff" stroke-width="0.8" class="flow-line" opacity="0.3"/>
 
-  <rect x="684" y="168" width="68" height="28" rx="5" fill="#1e2a1e" stroke="#3fb950" stroke-width="1"/>
-  <text x="718" y="186" text-anchor="middle" fill="#3fb950" font-size="10">pipelines</text>
+  <!-- schemas → AI -->
+  <line x1="762" y1="124" x2="700" y2="174" stroke="#4a9eff" stroke-width="0.8" class="glow-line" opacity="0.5"/>
+  <line x1="762" y1="124" x2="700" y2="174" stroke="#4a9eff" stroke-width="0.8" class="flow-line" opacity="0.3"/>
 
-  <rect x="684" y="228" width="68" height="28" rx="5" fill="#2a2010" stroke="#f0a500" stroke-width="1"/>
-  <text x="718" y="246" text-anchor="middle" fill="#f0a500" font-size="10">history</text>
+  <!-- pipelines → AI -->
+  <line x1="762" y1="195" x2="702" y2="195" stroke="#3fb950" stroke-width="0.8" class="glow-line" opacity="0.5"/>
+  <line x1="762" y1="195" x2="702" y2="195" stroke="#3fb950" stroke-width="0.8" class="flow-line" opacity="0.3"/>
 
-  <!-- Connecting lines to AI node -->
-  <line x1="516" y1="122" x2="572" y2="163" stroke="#2a3a2a" stroke-width="1.2"/>
-  <line x1="516" y1="182" x2="570" y2="182" stroke="#2a2a10" stroke-width="1.2"/>
-  <line x1="516" y1="242" x2="572" y2="207" stroke="#211828" stroke-width="1.2"/>
-  <line x1="684" y1="122" x2="628" y2="163" stroke="#1a2535" stroke-width="1.2"/>
-  <line x1="684" y1="182" x2="630" y2="182" stroke="#1a2a1a" stroke-width="1.2"/>
-  <line x1="684" y1="242" x2="628" y2="207" stroke="#1a2010" stroke-width="1.2"/>
+  <!-- history → AI -->
+  <line x1="762" y1="266" x2="700" y2="216" stroke="#f0a500" stroke-width="0.8" class="glow-line" opacity="0.5"/>
+  <line x1="762" y1="266" x2="700" y2="216" stroke="#f0a500" stroke-width="0.8" class="flow-line" opacity="0.3"/>
 
-  <!-- "Benefits" label -->
-  <text x="600" y="300" text-anchor="middle" fill="#3fb950" font-size="11">✓  context persists</text>
-  <text x="600" y="318" text-anchor="middle" fill="#3fb950" font-size="11">✓  everything connected</text>
+  <!-- Separator -->
+  <line x1="462" y1="304" x2="882" y2="304" stroke="#0d2a50" stroke-width="0.5"/>
 
-  <!-- Arrow markers -->
-  <defs>
-    <marker id="arr-grey" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-      <path d="M0,0 L6,3 L0,6 Z" fill="#3a3a3a"/>
-    </marker>
-  </defs>
+  <!-- Positive labels -->
+  <text x="672" y="325" text-anchor="middle" fill="#3a9a50" font-size="13" font-family="'Lato', sans-serif">✓  context persists across sessions</text>
+  <text x="672" y="349" text-anchor="middle" fill="#3a9a50" font-size="13" font-family="'Lato', sans-serif">✓  everything connected</text>
+  <text x="672" y="373" text-anchor="middle" fill="#3a9a50" font-size="13" font-family="'Lato', sans-serif">✓  AI lives inside your workflow</text>
+
+  <!-- === OUTER BORDER === -->
+  <rect x="0.5" y="0.5" width="899" height="419" fill="none" stroke="#1a1a2e" stroke-width="1" rx="12"/>
 </svg>
