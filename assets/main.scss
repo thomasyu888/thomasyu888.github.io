@@ -65,6 +65,38 @@ a:visited { color: #a89fdf; }
   a { color: #7eb8f7; }
 }
 
+// ── Callouts ──────────────────────────────────────────
+.note, .important, .warning, .tip {
+  border-left: 4px solid;
+  border-radius: 0 4px 4px 0;
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  font-style: normal;
+  color: #e0e0e0;
+
+  strong:first-child {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.note      { border-color: #4a9eff; background-color: #1a2a3a; strong:first-child { color: #4a9eff; } }
+.important { border-color: #b56bff; background-color: #21183a; strong:first-child { color: #b56bff; } }
+.warning   { border-color: #f0a500; background-color: #2a2010; strong:first-child { color: #f0a500; } }
+.tip       { border-color: #3fb950; background-color: #112218; strong:first-child { color: #3fb950; } }
+
+// ── Images ────────────────────────────────────────────
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+  margin: 1.5rem auto;
+}
+
 // ── Code ──────────────────────────────────────────────
 pre, code {
   background-color: #252525;
