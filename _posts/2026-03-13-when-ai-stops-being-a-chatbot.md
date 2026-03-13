@@ -18,9 +18,12 @@ Over time, this became a pattern. Difficult problems would send me to a chat win
 
 But the more I relied on it, the more one limitation became obvious.
 
-**Chat is a terrible interface for thinking about systems.**
+> **Important:** Chat is a terrible interface for thinking about systems. Every conversation resets. Every session starts from scratch. The tool is helpful, but the workflow fights you.
+{: .important}
 
 ---
+
+![Chat interface vs AI workspace — the shift in how AI fits into engineering work](/assets/images/ai-workflow-shift.svg)
 
 ## The Early AI Workflow
 
@@ -77,6 +80,9 @@ You can paste pieces of context into a conversation, but the system itself never
 That's useful for quick questions, but it breaks down when AI becomes part of the thinking process.
 
 Because once you start using AI as a collaborator, the missing context becomes the biggest bottleneck.
+
+> **Note:** This isn't a model problem — it's an interface problem. The models improved dramatically over this period. The workflow stayed the same.
+{: .note}
 
 ---
 
@@ -139,6 +145,9 @@ AI may end up changing something more fundamental: how engineers reason through 
 Instead of thinking alone and producing solutions, engineers increasingly work in a loop:
 
 **think → test ideas with AI → refine → implement.**
+
+> **Tip:** This loop works best when AI has access to the full context of what you're building — not just the snippet you pasted. The closer the AI lives to your actual work, the tighter the loop.
+{: .tip}
 
 The cycle becomes faster, more exploratory, and more conversational.
 
