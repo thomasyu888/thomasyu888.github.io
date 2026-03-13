@@ -44,69 +44,48 @@ It worked well for:
 - drafting documentation for developer tools
 - testing architectural ideas
 
-In many ways, AI functioned like a junior collaborator with infinite patience. It would happily walk through problems step by step, propose alternate approaches, and point out things that were easy to miss when you'd been staring at the same code for too long.
+In many ways, AI functioned like a junior collaborator with infinite patience. It would happily walk through problems step by step, propose alternate approaches, and point out things that were easy to miss when you'd been staring at the same code for too long. 
 
-But the workflow always had friction.
+Inititally this workflow had friction, as every conversation existing in isolation. That changed when ChatGPT introduced persistent memory — the ability to carry context across sessions. Suddenly the model could remember my projects, my preferences, my way of working. I didn't have to re-explain everything from scratch. That was a genuine shift, and it made the workflow meaningfully better.
 
-Every conversation existed in isolation.
+> **Note:** ChatGPT's memory feature moved AI from a stateless tool to something that could actually learn your context over time — closer to a collaborator than a search engine.
+{: .note}
 
-Each time a problem arose, the process started from scratch: paste the relevant code, explain the architecture again, reconstruct the context. Even when the model was helpful, the interaction never quite integrated with the rest of the work.
+But even with memory, a core limitation remained. The model knew what I had told it before — but it had no access to the actual systems. Codebases evolve. Infrastructure changes. Pipelines get restructured. ChatGPT's memory was a record of past conversations, not a live view of the work itself. Every time something changed, the gap between what the model knew and what was actually true quietly widened.
 
-The chat window was a separate universe.
-
-That limitation didn't matter much at first. But as AI became more embedded in the workflow, the fragmentation became harder to ignore.
+The chat window was a separate universe. That limitation didn't matter much at first, but as AI became more embedded in the workflow, the fragmentation became harder to ignore.
 
 ---
 
-## Engineering Work Is Mostly Context
+## Engineering Work Involves Context
 
-The deeper problem was that engineering rarely happens in small, isolated snippets.
+Engineering rarely happens in small, isolated snippets. Real work means navigating a web of related pieces:
 
-Most real work involves navigating context:
-
-- repositories
-- documentation
+- repositories and their history
+- documentation and architecture decisions
 - infrastructure definitions
-- datasets
-- metadata schemas
-- pipelines and orchestration logic
+- data schemas, pipelines, and orchestration logic
 
-Understanding a system means understanding how all of those pieces relate to each other.
+Understanding a system means understanding how all of those relate to each other — and how they're changing. You can paste pieces of that context into a chat window, but the system itself never lives there. The model only sees what you choose to show it, at that moment, frozen in time.
 
-Chat interfaces flatten that complexity.
-
-You can paste pieces of context into a conversation, but the system itself never lives inside the environment where the work is happening. The model only sees what you choose to show it in that moment.
-
-That's useful for quick questions, but it breaks down when AI becomes part of the thinking process.
-
-Because once you start using AI as a collaborator, the missing context becomes the biggest bottleneck.
-
-> **Note:** This isn't a model problem — it's an interface problem. The models improved dramatically over this period. The workflow stayed the same.
-{: .note}
+Once you start using AI as a collaborator rather than a search engine, this gap becomes the main constraint.
 
 ---
 
 ## The Moment the Workflow Changes
 
-At some point, the relationship with AI shifts.
-
-Instead of asking:
+At some point the question shifts. Instead of:
 
 > "Can this tool answer my question?"
 
-You start asking:
+It becomes:
 
 > "Where should AI live in the workflow?"
 
-That's a very different problem.
+That's a fundamentally different problem — and it exposes the core limitation of chat. Chat is optimized for conversation. Engineering work needs something closer to a workspace: a place where code, documents, datasets, and decisions all exist together, and where AI can operate on the current state of things rather than a description of them.
 
-The first version of AI tools assumed the interface would always be chat. But chat is optimized for conversation, not for reasoning about complex systems with many moving parts.
-
-Engineering work needs something closer to a workspace.
-
-A place where code, documents, architecture diagrams, datasets, and conversations all exist together.
-
-Without that shared context, every interaction starts with reconstruction.
+> **Note:** This isn't a model problem — it's an interface problem. Models improved dramatically over this period. The workflow stayed the same.
+{: .note}
 
 ---
 
@@ -114,59 +93,35 @@ Without that shared context, every interaction starts with reconstruction.
 
 More recently, I've been experimenting with a workflow centered around Claude.
 
-The interesting change isn't simply model capability. It's the idea of working with artifacts instead of isolated conversations.
+The interesting change isn't model capability — it's the idea of working with artifacts instead of isolated conversations. Instead of starting every session with a blank chat window, the work begins with the things you're already building: documents, code, datasets, structured ideas. The AI operates within that environment rather than alongside it.
 
-Instead of starting every interaction with a blank chat window, the work begins with the things you're already building: documents, code, datasets, and structured ideas.
+The consequences are practical: documents evolve collaboratively instead of being rewritten from scratch. Code and explanations live alongside each other. Context accumulates rather than resetting.
 
-The AI then becomes something that can operate within that environment, rather than outside of it.
+The next step beyond that is agents.
 
-That small shift has surprising consequences.
+I've been experimenting with workflows built around [Agent Skills](https://agentskills.io) — an open standard, originally developed by Anthropic, for giving AI agents discoverable capabilities. A skill is a folder of instructions, scripts, and context that an agent can find and use autonomously. Instead of you manually providing context at the start of each session, the agent discovers what it needs as the work unfolds.
 
-You can evolve documents collaboratively instead of rewriting them from scratch. Code and explanations live alongside each other. Context accumulates rather than disappearing with each conversation.
+The practical difference is significant. An agent with the right skills can navigate a codebase, check current pipeline state, consult documentation, and act — without you reconstructing that context by hand. As the work changes, the agent's understanding of it changes too.
 
-The system starts to feel less like a chatbot and more like a persistent workspace for reasoning.
+This is where MCP (Model Context Protocol) comes in. Rather than describing your systems to the model, you connect the model directly to them. In my current workflow that means live connections to GitHub, Jira, Slack, and [Synapse](https://claude.com/resources/tutorials/using-the-synapse-org-connector-in-claude) — the biomedical research platform where much of the scientific data we work with lives. The agent can query open tickets, check repository state, look up dataset metadata, and pull project context from Slack threads — all within a single session, without any manual copy-pasting.
+
+The result is that the gap between "what the model knows" and "what is actually true right now" collapses. Instead of working from a description of the system, the agent works from the system itself.
+
+> **Tip:** Agent Skills has been adopted across 30+ tools — Claude Code, GitHub Copilot, Cursor, Databricks, and others. Skills you define work across all of them, which means the context you build once travels with you across your entire toolchain.
+{: .tip}
 
 ---
 
 ## AI as Engineering Infrastructure
 
-What this points toward is something larger than a single tool or model.
+What this points toward is larger than any single tool.
 
-AI is slowly becoming part of the infrastructure of technical work.
+We've seen this pattern before. Version control changed how teams collaborate on code. Continuous integration changed how software gets validated. Cloud infrastructure changed how systems get deployed. Each shift didn't just add a new tool — it changed the underlying conditions of how engineering work happens.
 
-Not infrastructure in the sense of servers or pipelines, but in the sense of cognitive infrastructure—the systems that support how engineers think, explore ideas, and communicate complex systems.
+AI is doing something similar, but at the level of reasoning itself. Not infrastructure in the sense of servers or pipelines, but cognitive infrastructure — the systems that shape how engineers think through problems, explore ideas, and communicate complex systems to each other.
 
-We've seen similar shifts before.
+Instead of thinking alone and producing solutions, engineers increasingly work in a loop: **think → test ideas with AI → refine → implement.** The unit of work gets smaller and more exploratory.
 
-Version control changed how teams collaborate on code. Continuous integration changed how software gets validated and shipped. Cloud infrastructure changed how systems get deployed and scaled.
+We're still early in that transition. But once you start using AI as part of the thinking process rather than a question-answering tool, it becomes hard to imagine going back.
 
-AI may end up changing something more fundamental: how engineers reason through problems in the first place.
-
-Instead of thinking alone and producing solutions, engineers increasingly work in a loop:
-
-**think → test ideas with AI → refine → implement.**
-
-> **Tip:** This loop works best when AI has access to the full context of what you're building — not just the snippet you pasted. The closer the AI lives to your actual work, the tighter the loop.
-{: .tip}
-
-The cycle becomes faster, more exploratory, and more conversational.
-
----
-
-## The Future of AI Workflows
-
-If this trajectory continues, the next generation of AI tools won't feel like chat interfaces at all.
-
-They will look more like integrated environments where codebases, documentation, datasets, architecture discussions, and reasoning processes are all connected.
-
-In that world, AI stops being something you consult occasionally.
-
-It becomes something that exists continuously inside the systems where work happens.
-
-Less like a chatbot.
-
-More like a co-processor for engineering thought.
-
-We're still early in that transition.
-
-But once you start using AI as part of the thinking process rather than just a question-answering tool, it becomes hard to imagine going back to the old workflow.
+Less like a chatbot. More like a co-processor for engineering thought.
