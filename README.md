@@ -1,4 +1,5 @@
-## About me
+# thomasyu888.github.io
 
-[![https://img.freepik.com/free-vector/construction-with-black-yellow-stripes_1017-30755.jpg](https://img.freepik.com/free-vector/construction-with-black-yellow-stripes_1017-30755.jpg)](https://www.linkedin.com/in/thomasvyu
-)
+Personal site and blog. Built with Jekyll and GitHub Pages.
+
+https://thomasyu888.github.io
