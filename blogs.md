@@ -11,4 +11,4 @@ A curated list of blogs.
 
 A curated list of books.
 
-* https://www.amazon.com/Fundamentals-Data-Engineering-Robust-Systems/dp/1098108302
+* [Fundamentals of Data Engineering](https://joereis.substack.com/p/fundamentals-of-data-engineering)
