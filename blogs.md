@@ -6,5 +6,5 @@ permalink: /blogs/
 
 A curated list of blogs I enjoy reading.
 
-* https://theengineeringmanager.substack.com/
-* https://blog.dataexpert.io/
+* [The Engineering Manager](https://theengineeringmanager.substack.com/)
+* [Data Expert](https://blog.dataexpert.io/)
