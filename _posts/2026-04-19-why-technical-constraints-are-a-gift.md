@@ -95,7 +95,7 @@ Constraints make humans faster. They make AI-assisted development faster too. Le
 
 ## The Shift from Builder to Steward
 
-As an IC, success looks like building something impressive that is intuitive. As a leader, I'm still learning that thsi looks like systems that are easy to maintain, teams that onboard quickly, and decisions that age well.
+As an IC, success looks like building something impressive that is intuitive. As a leader, I'm still learning that this looks like systems that are easy to maintain, teams that onboard quickly, and decisions that age well.
 
 That shift is uncomfortable. I have to start saying "no" to technically exciting ideas in favor of simpler, more durable ones. But the payoff shows up over time—fewer late-night incidents, less tribal knowledge, more predictable delivery.
 
