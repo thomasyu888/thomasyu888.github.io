@@ -80,13 +80,26 @@ So when *is* the right time to innovate? I don't think the answer is "never," an
 > **Note:** The hard part is that "we could probably make the existing thing work" is almost always true. Innovation requires making a deliberate case that the cost of staying put outweighs the cost of change. And that's a team conversation, not a solo decision made during hundred-hour weeks.
 {: .note}
 
+## How AI has Changed Things—But Not How You'd Expect
+
+AI tools are often framed as a solution to complexity. Need to understand a sprawling codebase? Feed it to the model. Need to onboard to five different tools at once? Ask the AI.
+
+And yes—AI can absorb massive amounts of context. But I've started to think that's the wrong frame.
+
+> **Note:** The more constrained your stack, the more effective AI becomes. If an engineer is working within a focused, well-understood set of tools, AI can spend its context on the actual problem—the business logic, the edge case, the data transformation—instead of burning it on "how does our custom orchestration layer work again?"
+{: .note}
+
+A sprawling tech stack doesn't disappear when you introduce AI. It just becomes AI's problem too. The cognitive overhead that slows down human engineers shows up in the same way for AI-assisted workflows—more context to load, more ambiguity to resolve, slower iteration on the thing that actually matters.
+
+Constraints make humans faster. They make AI-assisted development faster too. Less noise, more signal, tighter feedback loops on the exact problem that needs to be solved.
+
 ## The Shift from Builder to Steward
 
-As an IC, success looks like building something impressive. As a manager, it looks like systems that are easy to maintain, teams that onboard quickly, and decisions that age well.
+As an IC, success looks like building something impressive that is intuitive. As a leader, I'm still learning that thsi looks like systems that are easy to maintain, teams that onboard quickly, and decisions that age well.
 
 That shift is uncomfortable. I have to start saying "no" to technically exciting ideas in favor of simpler, more durable ones. But the payoff shows up over time—fewer late-night incidents, less tribal knowledge, more predictable delivery.
 
-Developers will always find the most creative path forward. I realize one of my roles as a manager is to make sure that creativity lands where it matters most—on the actual problems that are correlated to the team's expertise.
+Developers will always find the most creative path forward. I recently realized one of my roles as a manager is to make sure that creativity lands where it matters most—on the actual problems that are correlated to the team's expertise.
 
 > **Important:** Technical constraints aren't a cage. They're a way of saying: *we trust you to do great work, and we're going to protect the space for you to do it.*
 {: .important}
