@@ -84,7 +84,7 @@ So when *is* the right time to innovate? I don't think the answer is "never," an
 
 AI tools are often framed as a solution to complexity. Need to understand a sprawling codebase? Feed it to the model. Need to onboard to five different tools at once? Ask the AI.
 
-And yes—AI can absorb massive amounts of context. But I've started to think that's the wrong frame.
+And yes—AI can absorb massive amounts of context. But I've started to think differently.
 
 > **Note:** The more constrained your stack, the more effective AI becomes. If an engineer is working within a focused, well-understood set of tools, AI can spend its context on the actual problem—the business logic, the edge case, the data transformation—instead of burning it on "how does our custom orchestration layer work again?"
 {: .note}
